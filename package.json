@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/CodesByShivam/HomeAutomation/issues"
   },
-  "homepage": "https://github.com/CodesByShivam/HomeAutomation#readme"
+  "homepage": "https://github.com/CodesByShivam/HomeAutomation#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
