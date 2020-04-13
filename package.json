@@ -1,0 +1,19 @@
+{
+  "name": "homeautomation",
+  "version": "1.0.0",
+  "description": "Home Automation Code",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodesByShivam/HomeAutomation.git"
+  },
+  "author": "Shivam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CodesByShivam/HomeAutomation/issues"
+  },
+  "homepage": "https://github.com/CodesByShivam/HomeAutomation#readme"
+}
