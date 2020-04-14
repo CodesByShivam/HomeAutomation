@@ -2,6 +2,9 @@ const fs = require('fs');
 
 const listDevices = () => {
     let deviceList = JSON.parse('['+fs.readFileSync('deviceList.txt')+']');
+    if(deviceList.length === 1){
+        return 0;
+    }
     deviceList.splice(0,1);
     console.log(deviceList);
     return deviceList;

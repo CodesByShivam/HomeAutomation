@@ -9,10 +9,50 @@
     <script src='main.js'></script>
 </head>
 <body>
-    <form method="post" action="addDevice">
-        DeviceName <input type="text" name="name">
-        DeviceDoes <input type="text" name="task">
-        <input type="submit">Add Device</button>
+    <h1>Add New Device</h1>
+    <div><a href="http://localhost:3000/">Home</a></div>
+    <div style="padding: 5px;">
+    <form id = "addDeviceForm">
+        Device Name <input type="text" name="name">
+        Device Does <input type="text" name="task">
+        <input type="submit" value="Add Device">
     </form>
+    </div>
+    <div id="addDiv" style="display: none;"></div>
+
+    <script>
+        const addForm = document.getElementById('addDeviceForm');
+
+        addForm.addEventListener('submit', function(subEvent){
+            subEvent.preventDefault();
+            const formData = new FormData(this);
+            let name;
+            let task;
+            for(const pair of formData){
+                if(pair[0] === 'name') name = pair[1];
+                if(pair[0] === 'task') task = pair[1];
+            }
+            
+            // console.log(name);
+            fetch('http://localhost:3000/addDevice',{
+                method:'POST',
+                headers:{"Content-Type": "application/json;charset=utf-8"},
+                body: JSON.stringify({name:name,task:task})
+            })
+            .then(res => {
+                return res.json();
+            })
+            .then(output => {
+                console.log(output);
+
+                let outputDiv = document.getElementById('addDiv');
+                outputDiv.innerHTML = `<h2>${output.output}</h2>`;
+                outputDiv.style.display = 'block';
+            })
+            .catch(err => {
+                console.log(err);
+            });
+        });
+    </script>
 </body>
 </html>

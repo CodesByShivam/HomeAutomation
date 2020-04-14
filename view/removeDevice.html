@@ -8,6 +8,7 @@
 </head>
 <body>
     <h1>Remove Device</h1>
+    <a href="http://localhost:3000/">Home</a>
     <div id="devList" style="width: 50%; padding: 50px; border: 5px;"></div>
     <div id="deletedDevice" style="width: 50%; display: none;"></div>
     <script>
@@ -21,14 +22,18 @@
                 return res.json();
             })
             .then(list => {
-                var a = '<ul>';
-                var b = '</ul>';
-                var m = [];
+                if(list.length === 0){
+                    displayList = '<h2>No devices found in the system</h2>'
+                }else{
+                    var a = '<ul>';
+                    var b = '</ul>';
+                    var m = [];
                 
-                for(var i=0;i<list.length;i++){
-                    a = a+'<li>' + list[i].name + `</li><button onClick = removeDevice('${list[i].name}')>Remove ${list[i].name}</button><br>`;
+                    for(var i=0;i<list.length;i++){
+                        a = a+'<li>' + list[i].name + `</li><button onClick = removeDevice('${list[i].name}')>Remove ${list[i].name}</button><br>`;
+                    }
+                    displayList = a+b;
                 }
-                displayList = a+b;
                 document.getElementById('devList').innerHTML = displayList;
             });
         };
@@ -41,7 +46,7 @@
             };
             fetch('http://localhost:3000/deleteDevice',params)
             .then(res => {
-                console.log(res.json());
+                // console.log(res.json());
                 var deletedDevice = '<h2>Device '+ devName + ' is deleted</h2>';
                 var deletediv = document.getElementById('deletedDevice')
                 deletediv.innerHTML = deletedDevice;

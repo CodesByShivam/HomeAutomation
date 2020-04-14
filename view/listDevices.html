@@ -24,14 +24,18 @@
                 return res.json();
             })
             .then(list => {
-                var a = '<ul>';
-                var b = '</ul>';
-                var m = [];
+                if(list.length === 0){
+                    displayList = '<h2>No devices found in the system</h2>'
+                }else{
+                    var a = '<ul>';
+                    var b = '</ul>';
+                    var m = [];
                 
-                for(var i=0;i<list.length;i++){
-                    a = a+'<li>' + list[i].name + `</li><button onClick = doTask('${list[i].name}','${list[i].task}')>DoTask</button><br>`;
+                    for(var i=0;i<list.length;i++){
+                        a = a+'<li>' + list[i].name + `</li><button onClick = doTask('${list[i].name}','${list[i].task}')>DoTask</button><br>`;
+                    }
+                    displayList = a+b;
                 }
-                displayList = a+b;
                 document.getElementById('devList').innerHTML = displayList;
             });
         };

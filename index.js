@@ -19,7 +19,11 @@ app.get('/listDevices', (req,res) => {
 
 app.get('/getDevices', (req,res) => {
     let list = manageDevice.listDevices();
-    res.send(JSON.stringify(list));
+    if(list === 0){
+        res.send([]);
+    }else{
+        res.send(JSON.stringify(list));
+    }
 });
 
 app.get('/removeDevice',(req,res) => {
@@ -39,8 +43,13 @@ app.get('/addDevice', (req,res) => {
 });
 
 app.post('/addDevice', (req,res) => {
-    manageDevice.addDevice(req.body);
-    res.send('New Device Added<a');
+    // console.log(res.body);
+    if(req.body.name !== ''){
+        manageDevice.addDevice(req.body);
+        res.send({output:'Device' + req.body.name + 'Added Successfully'});
+    }else{
+        res.send({output:'DeviceName is required'});
+    }
 });
 
 app.listen(3000, resp => {
