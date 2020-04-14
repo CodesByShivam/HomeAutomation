@@ -37,11 +37,13 @@
                     displayList = a+b;
                 }
                 document.getElementById('devList').innerHTML = displayList;
+            })
+            .catch(err => {
+                console.log(err);
             });
         };
 
         function doTask(name,task){
-            console.log(name,task);
             var taskDiv = document.getElementById('taskDiv')
             taskDiv.innerHTML = `<h2>The ${name} is doing task ${task}</h2>`;
             taskDiv.style.display = 'block';

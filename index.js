@@ -1,6 +1,5 @@
 const express = require('express');
 const bodyparser = require('body-parser');
-const multer = require('multer')().array();
 const app = express();
 const manageDevice = require('./manageDevice');
 
@@ -31,7 +30,6 @@ app.get('/removeDevice',(req,res) => {
 });
 
 app.delete('/deleteDevice', (req,res) => {
-    // console.log(req.body.name);
     manageDevice.removeDevice(req.body.name);
     res.send(req.body);
 });
@@ -43,10 +41,8 @@ app.get('/addDevice', (req,res) => {
 });
 
 app.post('/addDevice', (req,res) => {
-    // console.log(res.body);
     if(req.body.name !== ''){
-        manageDevice.addDevice(req.body);
-        res.send({output:'Device' + req.body.name + 'Added Successfully'});
+        res.send(manageDevice.addDevice(req.body));
     }else{
         res.send({output:'DeviceName is required'});
     }

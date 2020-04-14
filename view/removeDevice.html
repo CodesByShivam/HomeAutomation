@@ -35,6 +35,9 @@
                     displayList = a+b;
                 }
                 document.getElementById('devList').innerHTML = displayList;
+            })
+            .catch(err => {
+                console.log(err);
             });
         };
 
@@ -46,7 +49,6 @@
             };
             fetch('http://localhost:3000/deleteDevice',params)
             .then(res => {
-                // console.log(res.json());
                 var deletedDevice = '<h2>Device '+ devName + ' is deleted</h2>';
                 var deletediv = document.getElementById('deletedDevice')
                 deletediv.innerHTML = deletedDevice;

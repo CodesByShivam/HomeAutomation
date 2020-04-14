@@ -6,15 +6,29 @@ const listDevices = () => {
         return 0;
     }
     deviceList.splice(0,1);
-    console.log(deviceList);
     return deviceList;
 };
 
 const addDevice = device => {
-    fs.appendFile('deviceList.txt', ','+JSON.stringify(device), function (err) {
-        if (err) return err.message;
-        return 200;
-    });
+    let deviceList = listDevices();
+    if(deviceList === 0){
+        fs.appendFile('deviceList.txt', ','+JSON.stringify(device), function (err) {
+            if (err) return err.message;
+            return {output:'Device' + device.name + ' Added Successfully'};
+        });
+    }else{
+        for(let i=0;i<deviceList.length;i++){
+            if(device.name === deviceList[i].name){
+                return {output:'Device with name ' + device.name + ' already exists. Please chose another name.'};
+            }else{
+                fs.appendFile('deviceList.txt', ','+JSON.stringify(device), function (err) {
+                    if (err) return err.message;
+                    return {output:'Device' + device.name + ' Added Successfully'};
+                });
+            }
+        }
+    }
+    
 }
 
 const removeDevice = name => {
