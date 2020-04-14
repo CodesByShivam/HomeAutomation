@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!-- <link rel='stylesheet' type='text/css' media='screen' href='main.css'> -->
+    <!-- <script src='./main.js'></script> -->
+</head>
+<body>
+    <h1>
+        Device List
+    </h1>
+    <div id="devList"></div>
+    <script>
+        window.onload = function(){
+            listDevices();
+        }
+
+        function listDevices(){
+            fetch('http://localhost:3000/getDevices')
+            .then(res => {
+                return res.json();
+            })
+            .then(list => {
+                var a = '<ul>';
+                var b = '</ul>';
+                var m = [];
+                
+                for(var i=0;i<list.length;i++){
+                    // console.log(list[i].name);
+                    a = a+'<li>' + list[i].name + `</li><button id="taskButton">DoTask</button><br>`;
+                }
+                displayList = a+b;
+                document.getElementById('devList').innerHTML = displayList;
+
+            });
+        };
+
+        function doTask(device){
+            console.log(device);
+        };
+
+    </script>
+</body>
+</html>
