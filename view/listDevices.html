@@ -3,16 +3,16 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Page Title</title>
+    <title>List Devices</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <!-- <link rel='stylesheet' type='text/css' media='screen' href='main.css'> -->
-    <!-- <script src='./main.js'></script> -->
 </head>
 <body>
     <h1>
         Device List
     </h1>
-    <div id="devList"></div>
+    <a href="http://localhost:3000/">Home</a>
+    <div id="devList" style="width: 50%; padding: 50px; border: 5px;"></div>
+    <div id="taskDiv" style="display:none"></div>
     <script>
         window.onload = function(){
             listDevices();
@@ -29,17 +29,18 @@
                 var m = [];
                 
                 for(var i=0;i<list.length;i++){
-                    // console.log(list[i].name);
-                    a = a+'<li>' + list[i].name + `</li><button id="taskButton">DoTask</button><br>`;
+                    a = a+'<li>' + list[i].name + `</li><button onClick = doTask('${list[i].name}','${list[i].task}')>DoTask</button><br>`;
                 }
                 displayList = a+b;
                 document.getElementById('devList').innerHTML = displayList;
-
             });
         };
 
-        function doTask(device){
-            console.log(device);
+        function doTask(name,task){
+            console.log(name,task);
+            var taskDiv = document.getElementById('taskDiv')
+            taskDiv.innerHTML = `<h2>The ${name} is doing task ${task}</h2>`;
+            taskDiv.style.display = 'block';
         };
 
     </script>
